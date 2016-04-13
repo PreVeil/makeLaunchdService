@@ -8,21 +8,23 @@ import tempfile
 
 import pvHelpers
 
-if len(sys.argv) != 3:
-    print "error, usage: %s <label> <module>" % sys.argv[0]
+if len(sys.argv) != 4:
+    print "error, usage: %s <label> <module> <working-dir>" % sys.argv[0]
     sys.exit(1)
 label = sys.argv[1]
 module = sys.argv[2]
+working_dir = sys.argv[3]
 
 template_path = os.path.join(pvHelpers.getdir(__file__), "launchd.template.plist")
 plist = plistlib.readPlist(template_path)
 
 plist['Label'] = label
 plist['ProgramArguments'] = [
-    "/Applications/PreVeil/penv/bin/python",
+    sys.executable,
     "-m",
     module,
 ]
+plist['WorkingDirectory'] = working_dir
 
 temp_handle, plist_path = tempfile.mkstemp()
 os.close(temp_handle)

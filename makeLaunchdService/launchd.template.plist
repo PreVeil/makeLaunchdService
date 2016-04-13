@@ -10,6 +10,9 @@
   <key>GroupName</key>
   <string>wheel</string>
 
+  <key>WorkingDirectory</key>
+  <string></string>
+
   <key>ProgramArguments</key>
   <array>
     <string></string>
